@@ -1,0 +1,147 @@
+.scene {
+  --book-width: 280px;
+  --book-height: 420px;
+  --book-depth: 34px;
+
+  width: var(--book-width);
+  height: var(--book-height);
+  margin: 40px auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  perspective: 1800px;
+}
+
+.book {
+  position: relative;
+
+  width: var(--book-width);
+  height: var(--book-height);
+
+  transform-style: preserve-3d;
+  transform: rotateY(-32deg) rotateX(10deg);
+
+  transition:
+    transform 0.6s ease,
+    filter 0.6s ease;
+}
+
+/* =========================
+   جلد
+========================= */
+
+.cover {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+
+  border-radius: 4px;
+
+  background: #fff;
+
+  transform: translateZ(calc(var(--book-depth) / 2));
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.35),
+    0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.coverImage {
+  width: 98%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* =========================
+   عطف
+========================= */
+
+.spine {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  width: var(--book-depth);
+  height: 100%;
+  transform-origin: left;
+
+  transform: rotateY(-90deg) translateX(calc(var(--book-depth) / -2));
+  background: linear-gradient(to right, #c9b89b, #bca98a, #d7c6aa);
+
+  border-radius: 3px 0 0 3px;
+
+  overflow: hidden;
+}
+
+/* =========================
+   صفحات بالا
+========================= */
+
+.topPages {
+  position: absolute;
+
+  left: 0;
+  top: calc(var(--book-depth) / -2);
+
+  width: 100%;
+  height: var(--book-depth);
+
+  transform-origin: bottom;
+  transform: rotateX(90deg) translateZ(calc(var(--book-depth) / 2));
+
+  background: linear-gradient(to bottom, #faf7f2, #ebe6dd);
+}
+
+/* =========================
+   صفحات کنار
+========================= */
+
+.sidePages {
+  position: absolute;
+
+  top: 0;
+  right: calc(var(--book-depth) / -2);
+
+  width: var(--book-depth);
+  height: 100%;
+
+  transform-origin: left;
+  transform: rotateY(90deg) translateZ(calc(var(--book-depth) / 2));
+
+  background: linear-gradient(to right, #f7f3eb, #ece6db);
+}
+
+/* =========================
+   سایه زیر کتاب
+========================= */
+
+.shadow {
+  position: absolute;
+
+  left: 50%;
+  bottom: -42px;
+
+  width: 82%;
+  height: 40px;
+
+  transform: translateX(-50%) rotateX(90deg) translateZ(-90px);
+
+  background: rgba(0, 0, 0, 0.35);
+
+  filter: blur(28px);
+
+  border-radius: 50%;
+}
+
+/* =========================
+   Hover
+========================= */
+
+.scene:hover .book {
+  transform: rotateY(-18deg) rotateX(6deg) translateY(-10px);
+
+  filter: brightness(1.03);
+}
